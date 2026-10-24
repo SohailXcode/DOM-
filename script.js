@@ -1,39 +1,36 @@
-// querySelector gives the FIRST match
+let greeting = document.querySelector("#greeting");
+let nameBox = document.querySelector("#nameBox");
+let colorBtn = document.querySelector("#colorBtn");
+let runBtn = document.querySelector("#runBtn");
 
-// 1. Select by id (use #)
-let title = document.querySelector("#title");
-title.style.color = "teal";
+// WOW 1: The heading changes while you type
+nameBox.addEventListener("input", function () {
+  if (nameBox.value === "") {
+    greeting.textContent = "Hello, stranger!";
+  } else {
+    greeting.textContent = "Hello, " + nameBox.value + "!";
+  }
+});
 
-// 2. Select by class (use .)
-let note = document.querySelector(".note");
-note.style.backgroundColor = "yellow";
+// WOW 2: Random background color on every click
+colorBtn.addEventListener("click", function () {
+  let r = Math.floor(Math.random() * 256);
+  let g = Math.floor(Math.random() * 256);
+  let b = Math.floor(Math.random() * 256);
+  document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+});
 
-// 3. Select by tag name
-let plain = document.querySelector("p");
-plain.style.fontSize = "24px";
+// WOW 3: A button that runs away from the mouse
+runBtn.style.position = "absolute";
+runBtn.style.left = "300px";
+runBtn.style.top = "200px";
 
-// 4. Select inside another element
-let apple = document.querySelector("#fruits li");
-apple.style.color = "red";
+runBtn.addEventListener("mouseover", function () {
+  runBtn.style.left = Math.random() * 500 + "px";
+  runBtn.style.top = Math.random() * 300 + "px";
+});
 
-// 5. Select by attribute
-let email = document.querySelector("input[type='email']");
-email.style.border = "2px solid green";
-
-
-// querySelectorAll gives ALL matches
-
-let allItems = document.querySelectorAll("#fruits li");
-
-// Loop through every item
-for (let i = 0; i < allItems.length; i++) {
-  allItems[i].style.fontWeight = "bold";
-}
-
-// How many notes are there?
-let allNotes = document.querySelectorAll(".note");
-console.log("Number of notes:", allNotes.length);
-
-// If nothing matches, we get null
-let nothing = document.querySelector(".nothing");
-console.log("Nothing found:", nothing);
+// If a student is fast enough to catch it
+runBtn.addEventListener("click", function () {
+  greeting.textContent = "You caught me! 🎉";
+});
